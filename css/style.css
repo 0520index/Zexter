@@ -1053,9 +1053,8 @@ textarea {
 .service-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  background: var(--ink);
-  border: 1px solid var(--ink);
+  gap: 0.65rem;
+  background: transparent;
   margin-top: 3rem;
 }
 
@@ -1070,6 +1069,7 @@ textarea {
   overflow: hidden;
   transition: background 0.35s, color 0.35s;
   cursor: none;
+  border: 1px solid var(--ink);
 }
 
 .service-tile::before {
@@ -1585,6 +1585,10 @@ textarea {
     min-height: 480px;
   }
 
+  .service-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .service-panel__content {
     padding-left: 0;
   }
@@ -1660,6 +1664,34 @@ textarea {
 
   .orbit-node__label {
     font-size: 0.68rem;
+  }
+
+  .service-grid {
+    /* grid-template-columns: 1fr; */
+    gap: 0.65rem;
+    background: transparent;
+    border: none;
+    margin-top: 2rem;
+  }
+
+  .service-tile {
+    min-height: 0;
+    padding: 1.5rem 1.35rem;
+    border: 1px solid var(--ink);
+  }
+
+  .service-tile h3 {
+    font-size: 1.3rem;
+    margin: 0.65rem 0 0.45rem;
+  }
+
+  .service-tile p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  .service-tile__link {
+    margin-top: 1.15rem;
   }
 }
 

@@ -732,7 +732,9 @@ textarea {
 
 .hero__brand {
   font-family: var(--font-display);
-  font-size: clamp(1.6rem, 16cqi, 9rem);
+  /* Scale to content width so "ZEXTER" never exceeds the container */
+  font-size: clamp(1.8rem, 11vw, 9rem);
+  font-size: clamp(1.8rem, calc(100cqi / 6.8), 9rem);
   font-weight: 800;
   line-height: 0.88;
   letter-spacing: -0.045em;
@@ -741,6 +743,7 @@ textarea {
   margin-bottom: 1.5rem;
   position: relative;
   max-width: 100%;
+  white-space: nowrap;
 }
 
 .hero__brand::after {

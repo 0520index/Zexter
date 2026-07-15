@@ -657,11 +657,12 @@ textarea {
 
 /* ---- Hero ---- */
 .hero {
-  min-height: 100vh;
-  min-height: 100dvh;
+  /* Leave room so marquee sits in the first viewport */
+  min-height: calc(100vh - 4.25rem);
+  min-height: calc(100dvh - 4.25rem);
   display: grid;
-  align-items: end;
-  padding: calc(var(--nav-h) + 2rem) clamp(1.25rem, 5vw, 4rem) clamp(3rem, 8vw, 5rem);
+  align-items: center;
+  padding: calc(var(--nav-h) + 1rem) clamp(1.25rem, 5vw, 4rem) clamp(2rem, 4vw, 3rem);
   position: relative;
   overflow: hidden;
 }
@@ -725,19 +726,21 @@ textarea {
   z-index: 1;
   max-width: 1120px;
   width: 100%;
-  margin: 0 auto;
+  margin: clamp(7rem, 8vh, 5.5rem) auto 0;
+  container-type: inline-size;
 }
 
 .hero__brand {
   font-family: var(--font-display);
-  font-size: clamp(4.8rem, 18vw, 12rem);
+  font-size: clamp(1.6rem, 16cqi, 9rem);
   font-weight: 800;
-  line-height: 0.82;
-  letter-spacing: -0.04em;
+  line-height: 0.88;
+  letter-spacing: -0.045em;
   color: var(--ink);
   text-transform: uppercase;
   margin-bottom: 1.5rem;
   position: relative;
+  max-width: 100%;
 }
 
 .hero__brand::after {

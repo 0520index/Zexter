@@ -1,0 +1,13 @@
+/*
+Theme Name: Zexter
+Theme URI: https://zexter.example
+Author: Zexter
+Description: 株式会社zexter 公式サイト用テーマ（白×金）
+Version: 1.2.0
+Requires at least: 6.0
+Tested up to: 6.7
+Requires PHP: 7.4
+Text Domain: zexter
+*/
+
+/* 実スタイルは css/style.css を functions.php から読み込みます */

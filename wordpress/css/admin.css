@@ -1,0 +1,42 @@
+/* Zexter admin settings */
+.zexter-admin__lead {
+  max-width: 52rem;
+  font-size: 14px;
+}
+
+.zexter-admin .zexter-panel {
+  background: #fff;
+  border: 1px solid #c3c4c7;
+  border-top: none;
+  padding: 1.25rem 1.5rem 1.5rem;
+  max-width: 860px;
+}
+
+.zexter-admin .zexter-field {
+  margin: 0 0 1.1rem;
+}
+
+.zexter-admin .zexter-field label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+.zexter-admin .zexter-field input[type="text"],
+.zexter-admin .zexter-field textarea {
+  width: 100%;
+  max-width: 640px;
+}
+
+.zexter-admin .zexter-service {
+  border: 1px solid #dcdcde;
+  border-radius: 4px;
+  padding: 0.75rem 1rem 0.25rem;
+  margin: 0 0 1rem;
+  background: #f6f7f7;
+}
+
+.zexter-admin .zexter-service legend {
+  font-weight: 700;
+  padding: 0 0.35rem;
+}

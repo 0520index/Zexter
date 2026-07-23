@@ -9,14 +9,18 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Syne:wght@700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 
 <body>
   <div class="atmosphere" aria-hidden="true"></div>
-  <div class="foil-field" aria-hidden="true"></div>
+  <div class="fx-field" aria-hidden="true">
+    <span class="fx-field__slash fx-field__slash--a"></span>
+    <span class="fx-field__slash fx-field__slash--b"></span>
+    <span class="fx-field__slash fx-field__slash--c"></span>
+  </div>
   <div class="scroll-progress" aria-hidden="true"></div>
 
   <div class="intro" aria-hidden="true">
@@ -199,7 +203,7 @@
     <section class="section">
       <div class="wrap">
         <p class="eyebrow reveal">AT A GLANCE</p>
-        <h2 class="heading reveal reveal-delay-1">5つの入口から、<br />相談できます。</h2>
+        <h2 class="heading reveal reveal-delay-1"><span class="heading__num">5</span>つの入口から、<br />相談できます。</h2>
         <div class="service-grid">
           <a class="service-tile reveal" href="services.html#pest">
             <div>
@@ -241,7 +245,7 @@
             </div>
             <span class="service-tile__link">詳しく見る →</span>
           </a>
-          <a class="service-tile reveal reveal-delay-2">
+          <a class="service-tile service-tile--soon reveal reveal-delay-2">
             <div>
               <span class="service-tile__num">∞</span>
               <h3>Coming Soon</h3>

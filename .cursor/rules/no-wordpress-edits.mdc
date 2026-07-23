@@ -1,0 +1,10 @@
+---
+description: Do not edit files under wordpress/
+alwaysApply: true
+---
+
+# WordPress folder is read-only
+
+- Never create, edit, delete, or rename files under `wordpress/`.
+- When changing site content or behavior, edit the static site files instead (`index.html`, `about.html`, `services.html`, `contact.html`, `css/`, `js/`, etc.).
+- If asked to change WordPress theme files, refuse and point to the matching static files unless the user explicitly overrides this rule for that request.

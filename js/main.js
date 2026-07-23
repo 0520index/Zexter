@@ -153,13 +153,13 @@
     });
   }
 
-  /* ---- Accordion (services) ---- */
+  /* ---- Accordion (services overview on home) ---- */
   document.querySelectorAll(".service-panel").forEach((panel) => {
     const trigger = panel.querySelector(".service-panel__trigger");
     if (!trigger) return;
     trigger.addEventListener("click", () => {
       const willOpen = !panel.classList.contains("is-open");
-      document.querySelectorAll(".service-panel.is-open").forEach((p) => {
+      panel.parentElement?.querySelectorAll(".service-panel.is-open").forEach((p) => {
         if (p !== panel) {
           p.classList.remove("is-open");
           p.querySelector(".service-panel__trigger")?.setAttribute("aria-expanded", "false");

@@ -108,14 +108,12 @@ textarea {
   width: 160vmax;
   height: 1px;
   margin-left: -80vmax;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(138, 112, 32, 0.05) 28%,
-    rgba(240, 215, 140, 0.55) 50%,
-    rgba(201, 162, 39, 0.18) 62%,
-    transparent 100%
-  );
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(138, 112, 32, 0.05) 28%,
+      rgba(240, 215, 140, 0.55) 50%,
+      rgba(201, 162, 39, 0.18) 62%,
+      transparent 100%);
   box-shadow:
     0 0 18px rgba(240, 215, 140, 0.25),
     0 0 48px rgba(201, 162, 39, 0.12);
@@ -141,12 +139,10 @@ textarea {
   height: 1px;
   width: 120vmax;
   margin-left: -60vmax;
-  background: linear-gradient(
-    90deg,
-    transparent 10%,
-    rgba(224, 184, 58, 0.35) 50%,
-    transparent 90%
-  );
+  background: linear-gradient(90deg,
+      transparent 10%,
+      rgba(224, 184, 58, 0.35) 50%,
+      transparent 90%);
   box-shadow: 0 0 12px rgba(224, 184, 58, 0.2);
   animation: bladeSweepC 19s var(--ease-out) infinite;
   animation-delay: -12s;
@@ -157,16 +153,20 @@ textarea {
     opacity: 0;
     transform: translate3d(-18%, -42%, 0) rotate(-28deg) scaleX(0.85);
   }
+
   12% {
     opacity: 0.85;
   }
+
   45% {
     opacity: 0.55;
   }
+
   70% {
     opacity: 0;
     transform: translate3d(22%, 48%, 0) rotate(-28deg) scaleX(1.05);
   }
+
   100% {
     opacity: 0;
     transform: translate3d(22%, 48%, 0) rotate(-28deg) scaleX(1.05);
@@ -178,16 +178,20 @@ textarea {
     opacity: 0;
     transform: translate3d(24%, -38%, 0) rotate(18deg) scaleX(0.9);
   }
+
   18% {
     opacity: 0.45;
   }
+
   55% {
     opacity: 0.28;
   }
+
   78% {
     opacity: 0;
     transform: translate3d(-20%, 44%, 0) rotate(18deg) scaleX(1.1);
   }
+
   100% {
     opacity: 0;
     transform: translate3d(-20%, 44%, 0) rotate(18deg) scaleX(1.1);
@@ -199,13 +203,16 @@ textarea {
     opacity: 0;
     transform: translate3d(-10%, 30%, 0) rotate(-52deg) scaleX(0.8);
   }
+
   20% {
     opacity: 0.35;
   }
+
   60% {
     opacity: 0;
     transform: translate3d(16%, -36%, 0) rotate(-52deg) scaleX(1);
   }
+
   100% {
     opacity: 0;
     transform: translate3d(16%, -36%, 0) rotate(-52deg) scaleX(1);

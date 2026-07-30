@@ -14,6 +14,8 @@
     $desc = zexter_get('services_meta_description');
   } elseif (is_page('contact') || is_page_template('page-contact.php')) {
     $desc = zexter_get('contact_meta_description');
+  } elseif (is_post_type_archive('zexter_news') || is_singular('zexter_news')) {
+    $desc = zexter_get('news_meta_description');
   }
   if ($desc !== '') :
   ?>
@@ -27,7 +29,11 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
   <div class="atmosphere" aria-hidden="true"></div>
-  <div class="foil-field" aria-hidden="true"></div>
+  <div class="fx-field" aria-hidden="true">
+    <span class="fx-field__slash fx-field__slash--a"></span>
+    <span class="fx-field__slash fx-field__slash--b"></span>
+    <span class="fx-field__slash fx-field__slash--c"></span>
+  </div>
   <div class="scroll-progress" aria-hidden="true"></div>
 
   <?php if (is_front_page()) : ?>
@@ -47,7 +53,7 @@
   <?php endif; ?>
 
   <header class="site-header">
-    <a class="logo" href="<?php echo esc_url(home_url('/')); ?>">ZEXTER<span>株式会社zexter</span></a>
+    <a class="logo" href="<?php echo esc_url(home_url('/')); ?>">ZEXTER<span><?php zexter_e('logo_sub', false); ?></span></a>
     <button class="nav-toggle" type="button" aria-label="メニュー" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>

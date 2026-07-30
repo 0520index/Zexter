@@ -114,4 +114,18 @@ add_action('init', function () {
 <!-- /wp:columns --></div>
 <!-- /wp:group -->',
   ]);
+
+  register_block_pattern('zexter/news-list', [
+    'title' => 'お知らせ風リスト',
+    'categories' => ['zexter'],
+    'content' => '<!-- wp:list {"className":"news-feed"} -->
+<ul class="news-feed"><!-- wp:list-item -->
+<li><strong>タイトル</strong><br>本文をここに書きます。</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><strong>タイトル</strong><br>本文をここに書きます。</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->',
+  ]);
 });

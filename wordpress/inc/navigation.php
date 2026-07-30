@@ -24,10 +24,18 @@ class Zexter_Nav_Walker extends Walker_Nav_Menu
     $item = $data_object;
     $classes = empty($item->classes) ? [] : (array) $item->classes;
     $active = '';
-    foreach (['current-menu-item', 'current_page_item', 'current-menu-ancestor', 'current-menu-parent', 'current_page_ancestor'] as $c) {
+    foreach (['current-menu-item', 'current_page_item', 'current-menu-ancestor', 'current-menu-parent', 'current_page_ancestor', 'current-menu-item'] as $c) {
       if (in_array($c, $classes, true)) {
         $active = 'is-active';
         break;
+      }
+    }
+    // お知らせアーカイブへのカスタムリンク
+    if ($active === '' && (is_post_type_archive('zexter_news') || is_singular('zexter_news'))) {
+      $news_url = untrailingslashit(zexter_news_url());
+      $item_url = untrailingslashit((string) $item->url);
+      if ($news_url !== '' && $item_url === $news_url) {
+        $active = 'is-active';
       }
     }
     $atts = [
@@ -75,6 +83,7 @@ function zexter_nav_fallback(): void
     ['home', home_url('/'), 'ホーム'],
     ['about', zexter_page_url('about'), '会社情報'],
     ['services', zexter_page_url('services'), '事業内容'],
+    ['news', zexter_news_url(), 'お知らせ'],
     ['contact', zexter_page_url('contact'), 'お問い合わせ'],
   ];
   foreach ($items as [$slug, $url, $label]) {
@@ -112,58 +121,4 @@ add_action('after_setup_theme', function () {
     'primary' => 'ヘッダー・フッター共通メニュー',
   ]);
   add_post_type_support('page', 'excerpt');
-});
-
-/**
- * テーマ有効化時：メニューが空なら初期4ページを登録
- */
-add_action('after_switch_theme', function () {
-  if (has_nav_menu('primary')) {
-    return;
-  }
-
-  $menu_name = 'Zexterメイン';
-  $menu_id = wp_create_nav_menu($menu_name);
-  if (is_wp_error($menu_id)) {
-    return;
-  }
-
-  $home_id = (int) get_option('page_on_front');
-  if ($home_id) {
-    wp_update_nav_menu_item($menu_id, 0, [
-      'menu-item-title' => 'ホーム',
-      'menu-item-object' => 'page',
-      'menu-item-object-id' => $home_id,
-      'menu-item-type' => 'post_type',
-      'menu-item-status' => 'publish',
-    ]);
-  } else {
-    wp_update_nav_menu_item($menu_id, 0, [
-      'menu-item-title' => 'ホーム',
-      'menu-item-url' => home_url('/'),
-      'menu-item-type' => 'custom',
-      'menu-item-status' => 'publish',
-    ]);
-  }
-
-  foreach (['about' => '会社情報', 'services' => '事業内容', 'contact' => 'お問い合わせ'] as $slug => $label) {
-    $page = get_page_by_path($slug);
-    if (!$page) {
-      continue;
-    }
-    wp_update_nav_menu_item($menu_id, 0, [
-      'menu-item-title' => $label,
-      'menu-item-object' => 'page',
-      'menu-item-object-id' => $page->ID,
-      'menu-item-type' => 'post_type',
-      'menu-item-status' => 'publish',
-    ]);
-  }
-
-  $locations = get_theme_mod('nav_menu_locations', []);
-  if (!is_array($locations)) {
-    $locations = [];
-  }
-  $locations['primary'] = (int) $menu_id;
-  set_theme_mod('nav_menu_locations', $locations);
 });

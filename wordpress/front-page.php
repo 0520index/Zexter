@@ -6,6 +6,9 @@ get_header();
 
 $services = zexter_services();
 $angles = zexter_orbit_angles(count($services));
+$philosophy = zexter_pairs('home_philosophy');
+$guide = zexter_pairs('home_guide');
+$news_count = max(1, (int) zexter_get('home_news_count', '3'));
 $icons = [
   'pest' => '<circle cx="20" cy="20" r="8" stroke="currentColor" stroke-width="1.5" /><path d="M20 4v4M20 32v4M4 20h4M32 20h4M8.5 8.5l2.8 2.8M28.7 28.7l2.8 2.8M8.5 31.5l2.8-2.8M28.7 11.3l2.8-2.8" stroke="currentColor" stroke-width="1.5" />',
   'electric' => '<path d="M22 4L10 22h10l-2 14 12-18H20l2-14z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />',
@@ -14,6 +17,12 @@ $icons = [
   'ad' => '<path d="M8 26V14l14-6v24L8 26z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" /><path d="M22 16h6a4 4 0 0 1 0 8h-6" stroke="currentColor" stroke-width="1.5" />',
 ];
 $fallback_icon = '<circle cx="20" cy="20" r="7" stroke="currentColor" stroke-width="1.5" />';
+
+$news_query = new WP_Query([
+  'post_type' => 'zexter_news',
+  'posts_per_page' => $news_count,
+  'post_status' => 'publish',
+]);
 ?>
 <main class="main">
   <section class="hero">
@@ -45,6 +54,39 @@ $fallback_icon = '<circle cx="20" cy="20" r="7" stroke="currentColor" stroke-wid
       <?php endfor; ?>
     </div>
   </div>
+
+  <section class="section section--tight">
+    <div class="wrap">
+      <p class="eyebrow reveal">NEWS</p>
+      <h2 class="heading reveal reveal-delay-1"><?php zexter_e('home_news_heading', false); ?></h2>
+      <?php if ($news_query->have_posts()) : ?>
+        <ul class="news-list">
+          <?php
+          $i = 0;
+          while ($news_query->have_posts()) :
+            $news_query->the_post();
+            $delay = $i % 3;
+            $delay_class = $delay === 1 ? ' reveal-delay-1' : ($delay === 2 ? ' reveal-delay-2' : '');
+            ?>
+            <li class="news-list__item reveal<?php echo esc_attr($delay_class); ?>">
+              <a class="news-list__link" href="<?php the_permalink(); ?>">
+                <time datetime="<?php echo esc_attr(get_the_date('Y-m-d')); ?>"><?php echo esc_html(get_the_date('Y.m.d')); ?></time>
+                <span class="news-list__cat"><?php echo esc_html(zexter_news_category_label(get_the_ID())); ?></span>
+                <span class="news-list__title"><?php the_title(); ?></span>
+              </a>
+            </li>
+            <?php
+            $i++;
+          endwhile;
+          wp_reset_postdata();
+          ?>
+        </ul>
+      <?php endif; ?>
+      <div class="news-list__more reveal">
+        <a class="btn" href="<?php echo esc_url(zexter_news_url()); ?>">一覧を見る <span class="btn__arrow" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
 
   <section class="section">
     <div class="wrap">
@@ -87,27 +129,18 @@ $fallback_icon = '<circle cx="20" cy="20" r="7" stroke="currentColor" stroke-wid
         <div class="divider reveal reveal-delay-2"></div>
         <p class="lead reveal reveal-delay-2" style="margin-top:0"><?php zexter_e('home_philosophy_lead'); ?></p>
         <ul class="philosophy__list">
-          <li class="reveal">
-            <span class="philosophy__num">01</span>
-            <div>
-              <strong><?php zexter_e('home_phil_1_title', false); ?></strong>
-              <p><?php zexter_e('home_phil_1_text'); ?></p>
-            </div>
-          </li>
-          <li class="reveal reveal-delay-1">
-            <span class="philosophy__num">02</span>
-            <div>
-              <strong><?php zexter_e('home_phil_2_title', false); ?></strong>
-              <p><?php zexter_e('home_phil_2_text'); ?></p>
-            </div>
-          </li>
-          <li class="reveal reveal-delay-2">
-            <span class="philosophy__num">03</span>
-            <div>
-              <strong><?php zexter_e('home_phil_3_title', false); ?></strong>
-              <p><?php zexter_e('home_phil_3_text'); ?></p>
-            </div>
-          </li>
+          <?php foreach ($philosophy as $i => $item) :
+            $delay = $i % 3;
+            $delay_class = $delay === 1 ? ' reveal-delay-1' : ($delay === 2 ? ' reveal-delay-2' : '');
+            ?>
+            <li class="reveal<?php echo esc_attr($delay_class); ?>">
+              <span class="philosophy__num"><?php echo esc_html(str_pad((string) ($i + 1), 2, '0', STR_PAD_LEFT)); ?></span>
+              <div>
+                <strong><?php echo esc_html($item['title']); ?></strong>
+                <p><?php echo esc_html($item['text']); ?></p>
+              </div>
+            </li>
+          <?php endforeach; ?>
         </ul>
       </div>
     </div>
@@ -117,45 +150,55 @@ $fallback_icon = '<circle cx="20" cy="20" r="7" stroke="currentColor" stroke-wid
     <div class="wrap">
       <p class="eyebrow reveal">AT A GLANCE</p>
       <h2 class="heading reveal reveal-delay-1"><?php zexter_e('home_glance_heading'); ?></h2>
-      <div class="service-grid">
+      <p class="lead reveal reveal-delay-2"><?php zexter_e('home_glance_lead'); ?></p>
+      <div class="service-detail">
         <?php foreach ($services as $i => $svc) :
           $delay = $i % 3;
           $delay_class = $delay === 1 ? ' reveal-delay-1' : ($delay === 2 ? ' reveal-delay-2' : '');
           ?>
-          <a class="service-tile reveal<?php echo esc_attr($delay_class); ?>" href="<?php echo esc_url(zexter_page_url('services') . '#' . $svc['id']); ?>">
-            <div>
-              <span class="service-tile__num"><?php echo esc_html(str_pad((string) ($i + 1), 2, '0', STR_PAD_LEFT)); ?></span>
-              <h3><?php echo esc_html($svc['label'] !== '' ? $svc['label'] : $svc['title']); ?></h3>
-              <p><?php echo esc_html($svc['short']); ?></p>
+          <article class="service-panel reveal<?php echo esc_attr($delay_class); ?>">
+            <button class="service-panel__trigger" type="button" aria-expanded="false">
+              <span class="service-panel__num"><?php echo esc_html(str_pad((string) ($i + 1), 2, '0', STR_PAD_LEFT)); ?></span>
+              <span class="service-panel__title"><?php echo esc_html($svc['label'] !== '' ? $svc['label'] : $svc['title']); ?></span>
+              <span class="service-panel__icon" aria-hidden="true"></span>
+            </button>
+            <div class="service-panel__body">
+              <div class="service-panel__inner">
+                <div class="service-panel__content">
+                  <p><?php echo esc_html($svc['short']); ?></p>
+                  <a class="btn" href="<?php echo esc_url(zexter_page_url('services') . '#' . $svc['id']); ?>">詳しく見る <span class="btn__arrow" aria-hidden="true">→</span></a>
+                </div>
+              </div>
             </div>
-            <span class="service-tile__link">詳しく見る →</span>
-          </a>
+          </article>
         <?php endforeach; ?>
-        <a class="service-tile reveal reveal-delay-2">
-          <div>
-            <span class="service-tile__num">∞</span>
-            <h3><?php zexter_e('home_coming_title', false); ?></h3>
-            <p><?php zexter_e('home_coming_text'); ?></p>
+
+        <article class="service-panel reveal reveal-delay-2">
+          <button class="service-panel__trigger" type="button" aria-expanded="false">
+            <span class="service-panel__num"><?php zexter_e('home_coming_num', false); ?></span>
+            <span class="service-panel__title"><?php zexter_e('home_coming_title', false); ?></span>
+            <span class="service-panel__icon" aria-hidden="true"></span>
+          </button>
+          <div class="service-panel__body">
+            <div class="service-panel__inner">
+              <div class="service-panel__content">
+                <p><?php zexter_e('home_coming_text'); ?></p>
+                <a class="btn" href="<?php echo esc_url(zexter_page_url('contact')); ?>">相談する <span class="btn__arrow" aria-hidden="true">→</span></a>
+              </div>
+            </div>
           </div>
-          <span class="service-tile__link"><?php zexter_e('home_coming_title', false); ?></span>
-        </a>
+        </article>
       </div>
 
       <div class="guide reveal">
         <h3><?php zexter_e('home_guide_title', false); ?></h3>
         <div class="guide-steps">
-          <div>
-            <strong><?php zexter_e('home_guide_1_title', false); ?></strong>
-            <p><?php zexter_e('home_guide_1_text'); ?></p>
-          </div>
-          <div>
-            <strong><?php zexter_e('home_guide_2_title', false); ?></strong>
-            <p><?php zexter_e('home_guide_2_text'); ?></p>
-          </div>
-          <div>
-            <strong><?php zexter_e('home_guide_3_title', false); ?></strong>
-            <p><?php zexter_e('home_guide_3_text'); ?></p>
-          </div>
+          <?php foreach ($guide as $item) : ?>
+            <div>
+              <strong><?php echo esc_html($item['title']); ?></strong>
+              <p><?php echo esc_html($item['text']); ?></p>
+            </div>
+          <?php endforeach; ?>
         </div>
       </div>
     </div>

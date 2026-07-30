@@ -1,6 +1,6 @@
 <?php
 /**
- * 初期コンテンツ（未設定時の表示用）
+ * 初期コンテンツ（未設定時の表示用）— 静的サイトと同期
  */
 if (!defined('ABSPATH')) {
   exit;
@@ -10,59 +10,71 @@ function zexter_default_content(): array
 {
   return [
     // 会社・連絡先
-    'company_name' => '株式会社zexter（ゼクスター）',
-    'company_founded' => '法人化に伴い新たにスタート（詳細は後日更新）',
-    'company_business' => '害鳥・害虫・害獣駆除／電気工事／清掃／買い取り販売業／広告／その他（追加予定）',
-    'company_color' => '白 × 金 — 清潔さと信頼を表現',
-    'company_address' => '準備中（確定後に掲載します）',
-    'contact_email' => 'info@zexter.example',
-    'contact_phone' => '000-0000-0000',
+    'company_name' => '株式会社ZEXTER（ゼクスター）',
+    'contact_email' => 'info@zexter.co.jp',
+    'contact_phone' => '03-0000-0000',
     'contact_hours' => '平日 9:00 — 18:00',
-    'footer_blurb' => '株式会社zexter — 白と金を基調に、暮らしと街の課題へ多角的に取り組む会社です。',
-    'home_document_title' => '株式会社zexter｜白と金で拓く、多分野の現場力',
-    'home_meta_description' => '株式会社zexter。害鳥・害虫・害獣駆除、電気工事、清掃、買い取り販売、広告など、暮らしと街の課題に応える多角事業。',
+    'footer_blurb' => '株式会社ZEXTER — 暮らしと街の課題に、多角的に取り組む会社です。',
+    'footer_tagline' => '安心を届けて、快適な生活へ',
+    'logo_sub' => '株式会社ZEXTER',
+    'home_document_title' => '株式会社ZEXTER｜安心を届けて、快適な生活へ',
+    'home_meta_description' => '株式会社ZEXTER。害鳥・害虫・害獣駆除、電気工事、清掃、買い取り販売、広告など、暮らしと街の課題に応える多角事業。',
+
+    // 会社概要表（行の追加・削除可）
+    'company_rows' => [
+      ['label' => '会社名', 'value' => '株式会社ZEXTER（ゼクスター）'],
+      ['label' => '代表者', 'value' => '準備中'],
+      ['label' => '設立', 'value' => '2026年7月'],
+      ['label' => '資本金', 'value' => '準備中'],
+      ['label' => '所在地', 'value' => '〒160-0023 東京都新宿区西新宿3丁目3-13 6F'],
+      ['label' => '電話番号', 'value' => '050-8895-4505'],
+      ['label' => '事業内容', 'value' => '害鳥・害虫・害獣駆除／電気工事／清掃／買い取り販売／広告／その他'],
+      ['label' => 'お問い合わせ', 'value' => '__contact_link__'],
+    ],
 
     // トップ
     'home_hero_meta' => '01 / MULTI-DOMAIN FORCE',
     'home_hero_headline' => "現場を制し、\n領域を広げる。",
-    'home_hero_copy' => '駆除・電気・清掃・買い取り・広告。法人化した株式会社zexterは、きれいごとより、確かな対応力で勝負します。',
+    'home_hero_copy' => '駆除・電気・清掃・買い取り・広告。法人化した株式会社ZEXTERは、きれいごとより、確かな対応力で勝負します。',
     'home_orbit_heading' => "広がる事業を、\nひとつの軸で。",
-    'home_orbit_lead' => '中心は zexter。周囲に並ぶのは各事業領域。クリックで詳細へ。',
-    'home_philosophy_heading' => "白はキレ、\n金は刃。",
-    'home_philosophy_lead' => '上品さだけで終わらせない。コントラストを立て、迷わず動けるブランドへ。分野が増えても、この切れ味は保ちます。',
-    'home_phil_1_title' => 'わかりやすさ',
-    'home_phil_1_text' => '専門用語をできるだけ減らし、何をしてくれる会社かがすぐ分かるサイトにしています。',
-    'home_phil_2_title' => '現場に近い距離感',
-    'home_phil_2_text' => '駆除も電気も清掃も、地元の困りごとにすぐ応えることを大切にします。',
-    'home_phil_3_title' => 'これから増やしていく',
-    'home_phil_3_text' => '事業はこれから追加予定。更新しやすい一覧にして、成長に合わせて拡張できます。',
-    'home_glance_heading' => "5つの入口から、\n相談できます。",
-    'home_coming_title' => 'Coming Soon',
-    'home_coming_text' => 'zexter はこれからも分野を広げていきます。 「こんな相談もできる？」と思ったら、お気軽にお問い合わせください。',
+    'home_orbit_lead' => '中心は ZEXTER。周囲に並ぶのは各事業領域。クリックで詳細へ。',
+    'home_philosophy_heading' => "現場に立ち、\n領域を広げる。",
+    'home_philosophy_lead' => 'きれいごとより、確かな対応力。暮らしと街の課題に、分野をまたいで応えていきます。',
+    'home_philosophy' => [
+      ['title' => '困りごとを解決する', 'text' => '暮らしや現場で起きている課題に向き合い、必要な手立てを届けます。'],
+      ['title' => 'さまざまな事業に挑戦する', 'text' => '一つの枠にとどまらず、求められる領域へ踏み出し、仕事の幅を広げます。'],
+      ['title' => '現場で応える', 'text' => '机上の話で終わらせず、実際の現場で役立つ対応を積み重ねていきます。'],
+    ],
+    'home_glance_heading' => "取り扱う事業を、\nご紹介します。",
+    'home_glance_lead' => '行をタップ（クリック）すると概要が開きます。詳細は事業内容ページへ。',
+    'home_coming_num' => '99',
+    'home_coming_title' => '～準備中～',
+    'home_coming_text' => 'ZEXTER はこれからも分野を広げていきます。「こんな相談もできる？」と思ったら、お気軽にお問い合わせください。',
     'home_guide_title' => 'はじめての方へ — 3ステップ',
-    'home_guide_1_title' => '1. 事業を選ぶ',
-    'home_guide_1_text' => '「事業内容」から相談したい分野を確認します。',
-    'home_guide_2_title' => '2. 会社を知る',
-    'home_guide_2_text' => '「会社情報」で方針と概要を読めます。',
-    'home_guide_3_title' => '3. 連絡する',
-    'home_guide_3_text' => '「お問い合わせ」から内容を送ってください。',
+    'home_guide' => [
+      ['title' => '1. 事業を選ぶ', 'text' => '「事業内容」から相談したい分野を確認します。'],
+      ['title' => '2. 会社を知る', 'text' => '「会社情報」で方針と概要を読めます。'],
+      ['title' => '3. 連絡する', 'text' => '「お問い合わせ」から内容を送ってください。'],
+    ],
+    'home_news_heading' => 'お知らせ',
+    'home_news_count' => '3',
 
     // 会社情報ページ
-    'about_lead' => '法人化をきっかけに、ホームページを新たに開設しました。どんな会社かを、短い言葉で紹介します。',
-    'about_who_heading' => "分野は増やし、\n姿勢はそろえる。",
-    'about_who_body' => "株式会社zexterは、暮らしとお店の「困った」に応える会社です。\n\n害鳥・害虫・害獣の駆除、電気工事、清掃、買い取り販売、広告——いまはこれらの分野を軸に、今後の追加も見据えて動いています。\n\n難しい説明より、まずは「何をしてくれるのか」が分かること。それが私たちの最初の約束です。",
-    'about_timeline_lead' => '日付や住所が決まり次第、ここを正式情報に差し替えられます。',
-    'about_tl_1_title' => '法人化',
-    'about_tl_1_text' => '株式会社zexterとして、新たな体制でサービス提供を開始。',
-    'about_tl_2_title' => 'ホームページ公開',
-    'about_tl_2_text' => '白と金の世界観で、多分野事業をわかりやすく案内するサイトを公開。',
-    'about_tl_3_title' => '事業の拡充（予定）',
-    'about_tl_3_text' => '既存5分野に加え、ニーズに合わせてサービスを追加していく予定です。',
-    'about_meta_description' => '株式会社zexterの会社概要、方針、沿革イメージ。法人化を機に多分野へ展開します。',
+    'about_lead' => '株式会社ZEXTERの概要と、これまでの歩みをご紹介します。',
+    'about_who_heading' => "暮らしと現場の\n困りごとに応える。",
+    'about_who_body' => "株式会社ZEXTERは、害鳥・害虫・害獣駆除、電気工事、清掃、買い取り販売、広告など、幅広い分野でサービスを提供しています。\n\nお客様の課題に誠実に向き合い、必要な対応を迅速にお届けすることを大切にしています。今後も事業領域を広げながら、地域の頼れるパートナーを目指します。",
+    'about_timeline_heading' => '沿革',
+    'about_timeline_lead' => '正式な日付が決まり次第、順次更新します。',
+    'about_timeline' => [
+      ['title' => '法人設立', 'text' => '株式会社ZEXTERを設立し、各種サービス提供を開始。'],
+      ['title' => 'ホームページ開設', 'text' => '会社情報および事業内容を案内する公式サイトを公開。'],
+      ['title' => '事業拡大（予定）', 'text' => '既存事業に加え、お客様のニーズに応じたサービスを拡充予定。'],
+    ],
+    'about_meta_description' => '株式会社ZEXTERの会社概要・沿革。害鳥・害虫・害獣駆除、電気工事、清掃、買い取り販売、広告など多角的に事業を展開しています。',
 
     // 事業（最大8件）
-    'services_lead' => 'いま扱っている分野を一覧にしました。行をタップ（クリック）すると、やさしい説明が開きます。今後の追加にも対応しやすい形です。',
-    'services_meta_description' => '害鳥・害虫・害獣駆除、電気工事、清掃、買い取り販売、広告。株式会社zexterの事業一覧。',
+    'services_lead' => 'いま扱っている分野をカードで一覧にしました。気になる分野を選んで詳細をご確認ください。',
+    'services_meta_description' => '害鳥・害虫・害獣駆除、電気工事、清掃、買い取り販売、広告。株式会社ZEXTERの事業一覧。',
     'services' => [
       [
         'id' => 'pest',
@@ -91,7 +103,7 @@ function zexter_default_content(): array
       [
         'id' => 'buyout',
         'label' => '買い取り',
-        'title' => '買い取り販売業',
+        'title' => '買い取り販売',
         'short' => 'モノの循環。査定から販売まで幅広く。',
         'body' => '不要になったモノの買い取りや、再販を通じた循環に取り組みます。「処分するか迷っている」段階でも、まずはご相談ください。',
         'tags' => "買い取り査定\n販売\nモノの循環",
@@ -101,20 +113,23 @@ function zexter_default_content(): array
         'label' => '広告',
         'title' => '広告',
         'short' => '伝えたいことを、届く形に整えます。',
-        'body' => '伝えたい情報を、相手に届く形へ整えるお手伝いをします。チラシや告知、告知の考え方など、規模に合わせてサポートします。',
+        'body' => '伝えたい情報を、相手に届く形へ整えるお手伝いをします。チラシや告知、届け方の整理など、規模に合わせてサポートします。',
         'tags' => "告知・PR\n制作支援\n届け方の整理",
       ],
     ],
+    'services_soon_title' => 'Coming Soon',
+    'services_soon_text' => 'ZEXTER はこれからも分野を広げていきます。「こんな相談もできる？」と思ったら、お気軽にお問い合わせください。',
+
+    // お知らせページ文言
+    'news_lead' => '株式会社ZEXTERからの最新情報をお届けします。',
+    'news_meta_description' => '株式会社ZEXTERからのお知らせ・ニュース一覧。',
 
     // お問い合わせ
-    'contact_lead' => '「どの分野か分からない」でも大丈夫です。ざっくりした内容でも構いません。後から正式な電話・メールに差し替えできます。',
-    'contact_guide_heading' => "迷ったら、\nここを書いてください。",
-    'contact_guide_note' => "1. お名前\n2. 連絡先（メールか電話）\n3. 相談したい分野\n4. いま困っていること",
-    'contact_email_note' => '※仮のアドレスです。本番のメールに変更してください。',
-    'contact_phone_note' => '※仮の番号です。確定後に掲載します。',
-    'contact_hours_note' => '※営業時間は実情に合わせて更新してください。',
+    'contact_lead' => 'ご相談・お見積りなど、お気軽にお問い合わせください。分野が分からない場合も大丈夫です。',
+    'contact_guide_heading' => "お気軽に\nご相談ください。",
+    'contact_guide_note' => 'フォーム送信のほか、お電話・メールでも受け付けています。内容を確認のうえ、担当よりご連絡いたします。',
     'contact_form_note' => '現在はデモ動作です。送信ボタンを押すと確認メッセージが出ます。本番では Contact Form 7 などでメール送信に接続します。',
     'contact_cf7' => '',
-    'contact_meta_description' => '株式会社zexterへのお問い合わせ。駆除・電気・清掃・買い取り・広告のご相談はこちらから。',
+    'contact_meta_description' => '株式会社ZEXTERへのお問い合わせ。駆除・電気・清掃・買い取り・広告のご相談はこちらから。',
   ];
 }

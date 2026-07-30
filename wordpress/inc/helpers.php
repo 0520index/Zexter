@@ -18,9 +18,14 @@ function zexter_content(): array
   }
   $defaults = zexter_default_content();
   $merged = array_merge($defaults, $saved);
-  if (!empty($saved['services']) && is_array($saved['services'])) {
-    $merged['services'] = $saved['services'];
+
+  $list_keys = ['services', 'company_rows', 'about_timeline', 'home_philosophy', 'home_guide'];
+  foreach ($list_keys as $key) {
+    if (!empty($saved[$key]) && is_array($saved[$key])) {
+      $merged[$key] = $saved[$key];
+    }
   }
+
   $cache = $merged;
   return $cache;
 }
@@ -78,6 +83,57 @@ function zexter_e_gold_heading(string $key): void
   }
 }
 
+/**
+ * title/text のリストを正規化
+ */
+function zexter_pairs(string $key, string $title_key = 'title', string $text_key = 'text'): array
+{
+  $all = zexter_content();
+  $list = $all[$key] ?? [];
+  if (!is_array($list) || !$list) {
+    $list = zexter_default_content()[$key] ?? [];
+  }
+  $out = [];
+  foreach ($list as $row) {
+    if (!is_array($row)) {
+      continue;
+    }
+    $title = trim((string) ($row[$title_key] ?? ''));
+    if ($title === '') {
+      continue;
+    }
+    $out[] = [
+      $title_key => $title,
+      $text_key => (string) ($row[$text_key] ?? ''),
+    ];
+  }
+  return $out ?: (zexter_default_content()[$key] ?? []);
+}
+
+function zexter_company_rows(): array
+{
+  $all = zexter_content();
+  $list = $all['company_rows'] ?? [];
+  if (!is_array($list) || !$list) {
+    $list = zexter_default_content()['company_rows'];
+  }
+  $out = [];
+  foreach ($list as $row) {
+    if (!is_array($row)) {
+      continue;
+    }
+    $label = trim((string) ($row['label'] ?? ''));
+    if ($label === '') {
+      continue;
+    }
+    $out[] = [
+      'label' => $label,
+      'value' => (string) ($row['value'] ?? ''),
+    ];
+  }
+  return $out ?: zexter_default_content()['company_rows'];
+}
+
 function zexter_services(): array
 {
   $all = zexter_content();
@@ -123,4 +179,25 @@ function zexter_orbit_angles(int $count): array
     $angles[] = (int) round(-90 + (360 / $count) * $i);
   }
   return $angles;
+}
+
+/**
+ * お知らせアーカイブURL
+ */
+function zexter_news_url(): string
+{
+  $link = get_post_type_archive_link('zexter_news');
+  return $link ? $link : home_url('/news/');
+}
+
+/**
+ * お知らせカテゴリ表示名
+ */
+function zexter_news_category_label(int $post_id): string
+{
+  $terms = get_the_terms($post_id, 'zexter_news_cat');
+  if ($terms && !is_wp_error($terms)) {
+    return $terms[0]->name;
+  }
+  return 'お知らせ';
 }

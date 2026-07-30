@@ -3,13 +3,15 @@
  * Template Name: 会社情報
  */
 get_header();
+$rows = zexter_company_rows();
+$timeline = zexter_pairs('about_timeline');
 ?>
 <main class="main">
   <section class="page-hero">
     <div class="page-hero__bg" aria-hidden="true"></div>
     <div class="wrap">
       <p class="eyebrow reveal">ABOUT</p>
-      <h1 class="heading reveal reveal-delay-1">会社情報</h1>
+      <h1 class="heading reveal reveal-delay-1"><?php the_title(); ?></h1>
       <p class="lead reveal reveal-delay-2"><?php zexter_e('about_lead'); ?></p>
     </div>
   </section>
@@ -27,30 +29,18 @@ get_header();
         <h2 class="heading" style="font-size:1.8rem">会社概要</h2>
         <table class="info-table">
           <tbody>
-            <tr>
-              <th>会社名</th>
-              <td><?php zexter_e('company_name', false); ?></td>
-            </tr>
-            <tr>
-              <th>設立</th>
-              <td><?php zexter_e('company_founded'); ?></td>
-            </tr>
-            <tr>
-              <th>事業内容</th>
-              <td><?php zexter_e('company_business'); ?></td>
-            </tr>
-            <tr>
-              <th>カラー</th>
-              <td><?php zexter_e('company_color', false); ?></td>
-            </tr>
-            <tr>
-              <th>所在地</th>
-              <td><?php zexter_e('company_address'); ?></td>
-            </tr>
-            <tr>
-              <th>連絡先</th>
-              <td><a href="<?php echo esc_url(zexter_page_url('contact')); ?>" style="color:var(--gold-deep);border-bottom:1px solid var(--line)">お問い合わせページへ</a></td>
-            </tr>
+            <?php foreach ($rows as $row) : ?>
+              <tr>
+                <th><?php echo esc_html($row['label']); ?></th>
+                <td>
+                  <?php if (trim($row['value']) === '__contact_link__') : ?>
+                    <a href="<?php echo esc_url(zexter_page_url('contact')); ?>" style="color:var(--gold-deep);border-bottom:1px solid var(--line)">お問い合わせページへ</a>
+                  <?php else : ?>
+                    <?php echo nl2br(esc_html($row['value']), false); ?>
+                  <?php endif; ?>
+                </td>
+              </tr>
+            <?php endforeach; ?>
           </tbody>
         </table>
       </div>
@@ -59,22 +49,19 @@ get_header();
 
   <section class="section">
     <div class="wrap">
-      <p class="eyebrow reveal">STEPS</p>
-      <h2 class="heading reveal reveal-delay-1">これまでの流れ</h2>
+      <p class="eyebrow reveal">HISTORY</p>
+      <h2 class="heading reveal reveal-delay-1"><?php zexter_e('about_timeline_heading', false); ?></h2>
       <p class="lead reveal reveal-delay-2"><?php zexter_e('about_timeline_lead'); ?></p>
       <ul class="timeline">
-        <li class="reveal">
-          <strong><?php zexter_e('about_tl_1_title', false); ?></strong>
-          <p><?php zexter_e('about_tl_1_text'); ?></p>
-        </li>
-        <li class="reveal reveal-delay-1">
-          <strong><?php zexter_e('about_tl_2_title', false); ?></strong>
-          <p><?php zexter_e('about_tl_2_text'); ?></p>
-        </li>
-        <li class="reveal reveal-delay-2">
-          <strong><?php zexter_e('about_tl_3_title', false); ?></strong>
-          <p><?php zexter_e('about_tl_3_text'); ?></p>
-        </li>
+        <?php foreach ($timeline as $i => $item) :
+          $delay = $i % 3;
+          $delay_class = $delay === 1 ? ' reveal-delay-1' : ($delay === 2 ? ' reveal-delay-2' : '');
+          ?>
+          <li class="reveal<?php echo esc_attr($delay_class); ?>">
+            <strong><?php echo esc_html($item['title']); ?></strong>
+            <p><?php echo esc_html($item['text']); ?></p>
+          </li>
+        <?php endforeach; ?>
       </ul>
 
       <div class="btn-group reveal">

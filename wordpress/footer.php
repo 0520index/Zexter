@@ -14,8 +14,8 @@
       </div>
     </div>
     <div class="footer-copy">
-      <span>© 株式会社zexter</span>
-      <span>WHITE × GOLD</span>
+      <span>© <?php zexter_e('logo_sub', false); ?></span>
+      <span><?php zexter_e('footer_tagline', false); ?></span>
     </div>
   </footer>
 

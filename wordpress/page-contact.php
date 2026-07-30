@@ -11,7 +11,7 @@ $cf7 = trim(zexter_get('contact_cf7'));
     <div class="page-hero__bg" aria-hidden="true"></div>
     <div class="wrap">
       <p class="eyebrow reveal">CONTACT</p>
-      <h1 class="heading reveal reveal-delay-1">お問い合わせ</h1>
+      <h1 class="heading reveal reveal-delay-1"><?php the_title(); ?></h1>
       <p class="lead reveal reveal-delay-2"><?php zexter_e('contact_lead'); ?></p>
     </div>
   </section>
@@ -19,24 +19,21 @@ $cf7 = trim(zexter_get('contact_cf7'));
   <section class="section section--tight">
     <div class="wrap contact-layout">
       <div>
-        <p class="eyebrow reveal">BEFORE YOU SEND</p>
+        <p class="eyebrow reveal">GET IN TOUCH</p>
         <h2 class="heading reveal reveal-delay-1" style="font-size:clamp(1.7rem,3.5vw,2.3rem)"><?php zexter_e('contact_guide_heading'); ?></h2>
-        <p class="contact-note reveal reveal-delay-2" style="margin-top:1.25rem"><?php zexter_e('contact_guide_note'); ?></p>
+        <p class="lead reveal reveal-delay-2" style="margin-top:1.25rem;font-size:1rem"><?php zexter_e('contact_guide_note'); ?></p>
         <ul class="contact-channels reveal">
           <li>
             <small>EMAIL</small>
             <strong><?php zexter_e('contact_email', false); ?></strong>
-            <p style="margin-top:0.35rem;font-size:0.85rem;color:var(--ink-mute)"><?php zexter_e('contact_email_note'); ?></p>
           </li>
           <li>
             <small>PHONE</small>
             <strong><?php zexter_e('contact_phone', false); ?></strong>
-            <p style="margin-top:0.35rem;font-size:0.85rem;color:var(--ink-mute)"><?php zexter_e('contact_phone_note'); ?></p>
           </li>
           <li>
             <small>HOURS</small>
             <strong><?php zexter_e('contact_hours', false); ?></strong>
-            <p style="margin-top:0.35rem;font-size:0.85rem;color:var(--ink-mute)"><?php zexter_e('contact_hours_note'); ?></p>
           </li>
         </ul>
       </div>
@@ -72,7 +69,7 @@ $cf7 = trim(zexter_get('contact_cf7'));
             </div>
             <div class="form-field">
               <label for="message">お問い合わせ内容 *</label>
-              <textarea id="message" name="message" required placeholder="例：近所の鳥の糞被害で困っています。見積もりを希望します。"></textarea>
+              <textarea id="message" name="message" required placeholder="例：貴社のサービスについて詳しく伺いたいです。お見積りやご相談が可能か教えてください。"></textarea>
             </div>
             <p class="form-status" role="status" aria-live="polite"></p>
             <button class="btn btn--solid" type="submit">内容を送る <span class="btn__arrow" aria-hidden="true">→</span></button>

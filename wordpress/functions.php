@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) {
   exit;
 }
 
-define('ZEXTER_VERSION', '2.0.0');
+define('ZEXTER_VERSION', '2.1.0');
 
 require_once get_template_directory() . '/inc/defaults.php';
 require_once get_template_directory() . '/inc/helpers.php';
@@ -55,7 +55,7 @@ add_action('after_setup_theme', function () {
 add_action('wp_enqueue_scripts', function () {
   wp_enqueue_style(
     'zexter-fonts',
-    'https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Syne:wght@700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap',
+    'https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap',
     [],
     null
   );

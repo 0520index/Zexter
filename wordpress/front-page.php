@@ -30,7 +30,17 @@ $news_query = new WP_Query([
     <div class="hero__shine" aria-hidden="true"></div>
     <div class="hero__slash" aria-hidden="true"></div>
     <div class="hero__content">
-      <p class="hero__meta"><?php zexter_e('home_hero_meta', false); ?></p>
+      <p class="hero__meta"><?php
+        $hero_meta = zexter_get('home_hero_meta');
+        if (preg_match('/^(\S+)\s*(\/.*)?$/u', $hero_meta, $m)) {
+          echo '<span>' . esc_html($m[1]) . '</span>';
+          if (!empty($m[2])) {
+            echo ' ' . esc_html(ltrim($m[2]));
+          }
+        } else {
+          echo esc_html($hero_meta);
+        }
+      ?></p>
       <h1 class="hero__brand">ZEXTER</h1>
       <p class="hero__headline"><?php zexter_e('home_hero_headline'); ?></p>
       <p class="hero__copy"><?php zexter_e('home_hero_copy'); ?></p>
@@ -122,7 +132,9 @@ $news_query = new WP_Query([
 
   <section class="section section--tight">
     <div class="wrap philosophy">
-      <div class="philosophy__visual reveal" aria-hidden="true"></div>
+      <div class="philosophy__visual reveal">
+        <img src="<?php echo esc_url(get_template_directory_uri() . '/images/WordPress.png'); ?>" alt="<?php echo esc_attr(zexter_get('logo_sub')); ?>" width="256" height="256" />
+      </div>
       <div>
         <p class="eyebrow reveal">PHILOSOPHY</p>
         <h2 class="heading reveal reveal-delay-1"><?php zexter_e_gold_heading('home_philosophy_heading'); ?></h2>
@@ -159,7 +171,7 @@ $news_query = new WP_Query([
           <article class="service-panel reveal<?php echo esc_attr($delay_class); ?>">
             <button class="service-panel__trigger" type="button" aria-expanded="false">
               <span class="service-panel__num"><?php echo esc_html(str_pad((string) ($i + 1), 2, '0', STR_PAD_LEFT)); ?></span>
-              <span class="service-panel__title"><?php echo esc_html($svc['label'] !== '' ? $svc['label'] : $svc['title']); ?></span>
+              <span class="service-panel__title"><?php echo esc_html($svc['title']); ?></span>
               <span class="service-panel__icon" aria-hidden="true"></span>
             </button>
             <div class="service-panel__body">
